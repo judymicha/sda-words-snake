@@ -7,7 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.Comparator.comparing;
 
 @Service
 public class WordsServiceImpl implements WordsService{
@@ -16,15 +21,20 @@ public class WordsServiceImpl implements WordsService{
     private WordsRepository wordsRepository;
 
     @Override
-    public void addWord(String word) {
-
-        wordsRepository.save(wordsRepository.findOneByOrder());
-        // TODO: zapiswaynie slowa do bazy gdy pasuje do domina
+    public void addWord(String newWord) {
+        // zapiswaynie slowa do bazy gdy pasuje do domina
+        Words word = new Words();
+        word.setSnakePiece(newWord);
+        word.setTime(LocalDateTime.now());
+        wordsRepository.save(word);
     }
 
     @Override
-    public List<Words> findAll() {
-        //TODO: wyswietlamy wszystkie slowa w kolejnosci dodania
-        return wordsRepository.findAll();
+    public List<String> findAll() {
+        //wyswietlamy wszystkie slowa w kolejnosci dodania
+        return wordsRepository.findAll().stream()
+            .sorted(comparing(Words::getTime))
+            .map(Words::getSnakePiece)
+            .collect(Collectors.toList());
     }
 }

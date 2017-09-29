@@ -7,5 +7,5 @@ import java.util.List;
 public interface WordsService {
 
     void addWord(String word);
-    List<Words> findAll();
+    List<String> findAll();
 }

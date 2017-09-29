@@ -20,8 +20,8 @@ public class WordsController {
         // TODO : metoda, ktora przyjmie slowo od uzytkownika  ???
 
     @GetMapping
-    public String check() {
-        return "Everything's correct!";
+    public List<String> findAll() {
+        return null;
     }
 
 
