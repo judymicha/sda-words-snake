@@ -1,6 +1,7 @@
 package com.github.judymicha.controller;
 
 import com.github.judymicha.model.Words;
+import com.github.judymicha.repository.WordsRepository;
 import com.github.judymicha.service.WordsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +17,11 @@ public class WordsController {
     @Autowired
     private WordsService wordsService;
 
-    // TODO : metoda, ktora przyjmie slowo od uzytkownika
-    @GetMapping
-    public void getWord() {
+        // TODO : metoda, ktora przyjmie slowo od uzytkownika  ???
 
+    @GetMapping
+    public String check() {
+        return "Everything's correct!";
     }
 
 

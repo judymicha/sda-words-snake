@@ -1,5 +1,6 @@
 package com.github.judymicha.service.impl;
 
+import com.github.judymicha.model.Words;
 import com.github.judymicha.repository.WordsRepository;
 import com.github.judymicha.service.WordsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +17,14 @@ public class WordsServiceImpl implements WordsService{
 
     @Override
     public void addWord(String word) {
+
+        wordsRepository.save(wordsRepository.findOneByOrder());
         // TODO: zapiswaynie slowa do bazy gdy pasuje do domina
     }
 
     @Override
-    public List<String> findAllWords() {
-
+    public List<Words> findAll() {
         //TODO: wyswietlamy wszystkie slowa w kolejnosci dodania
-        return null;
+        return wordsRepository.findAll();
     }
 }
