@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface WordsRepository extends JpaRepository<Words, Long> {
 
-    //Words findOneByOrder();
+    Words findFirstByOrderByTimeDesc();
 
 }

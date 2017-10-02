@@ -22,16 +22,24 @@ public class WordsServiceImpl implements WordsService{
 
     @Override
     public void addWord(String newWord) {
-        // zapiswaynie slowa do bazy gdy pasuje do domina
+
+        String firstLetterOfNewWord = newWord.substring(0,1);
+
         Words word = new Words();
         word.setSnakePiece(newWord);
         word.setTime(LocalDateTime.now());
-        wordsRepository.save(word);
+
+        if(wordsRepository.findAll().isEmpty()) {
+            wordsRepository.save(word);
+        } else if(wordsRepository.findFirstByOrderByTimeDesc().getSnakePiece().endsWith(firstLetterOfNewWord)) {
+            wordsRepository.save(word);
+        } else {
+            throw new RuntimeException("The word does not match to our domino");
+        }
     }
 
     @Override
     public List<String> findAll() {
-        //wyswietlamy wszystkie slowa w kolejnosci dodania
         return wordsRepository.findAll().stream()
             .sorted(comparing(Words::getTime))
             .map(Words::getSnakePiece)

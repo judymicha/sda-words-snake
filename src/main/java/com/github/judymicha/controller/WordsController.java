@@ -4,9 +4,7 @@ import com.github.judymicha.model.Words;
 import com.github.judymicha.repository.WordsRepository;
 import com.github.judymicha.service.WordsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,11 +15,14 @@ public class WordsController {
     @Autowired
     private WordsService wordsService;
 
-        // TODO : metoda, ktora przyjmie slowo od uzytkownika  ???
+    @PostMapping("/add-word")
+    public void addWord (@RequestParam String word) {
+        wordsService.addWord(word);
+    }
 
     @GetMapping
     public List<String> findAll() {
-        return null;
+        return wordsService.findAll();
     }
 
 
